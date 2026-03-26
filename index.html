@@ -1,0 +1,1103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aceptación de Carga — PALMERO</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Mona+Sans:ital,wdth,wght@0,75..125,200..900;1,75..125,200..900&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════════
+   PALMERO BRAND SYSTEM
+   Negro   #2C2825  · Naranja #F4552A  · Crema #FAF9F4
+═══════════════════════════════════════════ */
+:root {
+  --negro:      #2C2825;
+  --negro-2:    #232120;
+  --negro-3:    #1e1b19;
+  --negro-4:    #3a3532;
+  --naranja:    #F4552A;
+  --naranja-dim:#c63e18;
+  --naranja-bg: rgba(244,85,42,0.12);
+  --crema:      #FAF9F4;
+  --crema-dim:  #edeae1;
+  --blanco:     #FFFFFF;
+  --gris-texto: #9e9890;
+  --gris-borde: rgba(250,249,244,0.12);
+  --gris-borde2:rgba(250,249,244,0.07);
+  --verde:      #2a9d5c;
+  --verde-bg:   rgba(42,157,92,0.15);
+  --amarillo:   #e8a117;
+  --amarillo-bg:rgba(232,161,23,0.15);
+  --rojo-bg:    rgba(244,85,42,0.15);
+  --radius:     8px;
+  --font: 'Mona Sans', sans-serif;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+body{
+  font-family:var(--font);
+  background:var(--negro);
+  color:var(--crema);
+  min-height:100vh;
+  font-size:13px;
+  line-height:1.5;
+  position:relative;
+}
+
+/* ── TRAMA INSTITUCIONAL (fondo con texto PALMERO repetido) ── */
+body::before{
+  content:'';
+  position:fixed;
+  inset:0;
+  background-image:repeating-linear-gradient(
+    -45deg,
+    transparent 0px,
+    transparent 60px,
+    rgba(250,249,244,0.018) 60px,
+    rgba(250,249,244,0.018) 61px
+  );
+  pointer-events:none;
+  z-index:0;
+}
+.trama-text{
+  position:fixed;
+  top:0; left:-10%;
+  width:55%;
+  height:100%;
+  overflow:hidden;
+  pointer-events:none;
+  z-index:0;
+  opacity:0.055;
+  display:flex;
+  flex-direction:column;
+  gap:0;
+  justify-content:flex-start;
+}
+.trama-row{
+  font-family:var(--font);
+  font-weight:900;
+  font-size:80px;
+  line-height:0.95;
+  color:var(--crema);
+  letter-spacing:-2px;
+  white-space:nowrap;
+  text-transform:uppercase;
+}
+
+/* ── HEADER ── */
+.header{
+  background:var(--negro-3);
+  border-bottom:3px solid var(--naranja);
+  padding:0 32px;
+  display:flex;
+  align-items:center;
+  gap:20px;
+  height:64px;
+  position:sticky;
+  top:0;
+  z-index:100;
+}
+.logo-palmero{
+  font-family:var(--font);
+  font-weight:900;
+  font-size:26px;
+  letter-spacing:1px;
+  color:var(--crema);
+  text-transform:uppercase;
+  line-height:1;
+}
+.header-divider{width:1px;height:28px;background:rgba(250,249,244,0.15);}
+.header-tagline{
+  font-size:11px;
+  font-weight:400;
+  color:var(--gris-texto);
+  letter-spacing:0.03em;
+}
+.header-badge{
+  font-size:10px;
+  font-weight:700;
+  color:var(--naranja);
+  background:var(--naranja-bg);
+  border:1px solid rgba(244,85,42,0.3);
+  border-radius:4px;
+  padding:3px 10px;
+  letter-spacing:0.05em;
+  text-transform:uppercase;
+}
+.header-right{margin-left:auto;display:flex;align-items:center;gap:10px;}
+
+/* ── BARRA NARANJA IDENTIFICADORA (sección) ── */
+.barra-titulo{
+  display:inline-flex;
+  align-items:center;
+  background:var(--naranja);
+  color:var(--crema);
+  font-weight:800;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  padding:5px 14px 5px 12px;
+  border-radius:4px 20px 20px 4px;
+  margin-bottom:14px;
+  gap:6px;
+}
+.barra-titulo-outline{
+  display:inline-flex;
+  align-items:center;
+  background:transparent;
+  color:var(--naranja);
+  border:2px solid var(--naranja);
+  font-weight:800;
+  font-size:11px;
+  text-transform:uppercase;
+  letter-spacing:0.1em;
+  padding:4px 14px 4px 12px;
+  border-radius:4px 20px 20px 4px;
+  margin-bottom:14px;
+}
+
+/* ── LAYOUT ── */
+.container{max-width:1440px;margin:0 auto;padding:28px 32px;position:relative;z-index:1;}
+
+/* ── CARDS ── */
+.card{
+  background:rgba(35,33,32,0.95);
+  border:1px solid var(--gris-borde);
+  border-radius:var(--radius);
+  padding:20px 24px;
+  margin-bottom:20px;
+  backdrop-filter:blur(4px);
+  position:relative;
+  overflow:hidden;
+}
+.card::before{
+  content:'';
+  position:absolute;
+  top:0; left:0; right:0;
+  height:3px;
+  background:var(--naranja);
+  opacity:0;
+  transition:opacity 0.3s;
+}
+.card:hover::before{opacity:1;}
+
+.card-header{
+  display:flex;
+  align-items:center;
+  gap:10px;
+  margin-bottom:16px;
+  padding-bottom:12px;
+  border-bottom:1px solid var(--gris-borde2);
+}
+.card-title{
+  font-size:13px;
+  font-weight:700;
+  color:var(--crema);
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+}
+
+/* ── PROJECT INFO ── */
+.project-grid{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:14px;align-items:start;}
+.field-label{font-size:10px;color:var(--gris-texto);margin-bottom:5px;text-transform:uppercase;letter-spacing:0.08em;font-weight:600;}
+.field-input{
+  width:100%;
+  background:rgba(250,249,244,0.06);
+  border:1px solid var(--gris-borde);
+  border-radius:var(--radius);
+  color:var(--crema);
+  font-family:var(--font);
+  font-size:12px;
+  font-weight:500;
+  padding:8px 12px;
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+}
+.field-input:focus{border-color:var(--naranja);background:rgba(244,85,42,0.07);}
+.field-input::placeholder{color:var(--gris-texto);}
+
+/* ── EQUIPMENT SELECTOR ── */
+.equip-row{display:grid;grid-template-columns:180px 1fr;gap:14px;align-items:start;}
+.select-styled{
+  width:100%;
+  background:rgba(250,249,244,0.06);
+  border:1px solid var(--gris-borde);
+  border-radius:var(--radius);
+  color:var(--crema);
+  font-family:var(--font);
+  font-size:12px;
+  font-weight:500;
+  padding:8px 36px 8px 12px;
+  outline:none;
+  cursor:pointer;
+  transition:border-color 0.2s,background 0.2s;
+  appearance:none;
+  -webkit-appearance:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='6' viewBox='0 0 10 6'%3E%3Cpath d='M0 0l5 6 5-6z' fill='%23F4552A'/%3E%3C/svg%3E");
+  background-repeat:no-repeat;
+  background-position:right 12px center;
+}
+.select-styled:focus{border-color:var(--naranja);background-color:rgba(244,85,42,0.07);}
+.select-styled option{background:var(--negro-2);color:var(--crema);}
+
+/* ── SPECS PANEL ── */
+.specs-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;}
+.spec-item{
+  background:var(--negro-3);
+  border:1px solid var(--gris-borde2);
+  border-radius:var(--radius);
+  padding:12px 14px;
+  position:relative;
+  overflow:hidden;
+}
+.spec-item::after{
+  content:'';
+  position:absolute;
+  bottom:0; left:0; right:0;
+  height:2px;
+  background:linear-gradient(90deg,var(--naranja),transparent);
+}
+.spec-label{font-size:9px;color:var(--gris-texto);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:5px;font-weight:600;}
+.spec-value{font-weight:900;font-size:18px;color:var(--naranja);line-height:1;}
+.spec-unit{font-size:10px;color:var(--gris-texto);font-weight:400;margin-left:3px;}
+
+/* ── LOAD TABLE ── */
+.table-wrapper{overflow-x:auto;border-radius:var(--radius);border:1px solid var(--gris-borde2);}
+table.load-table{
+  width:100%;
+  border-collapse:collapse;
+  font-size:11px;
+}
+.load-table th{
+  background:var(--negro-3);
+  color:var(--gris-texto);
+  font-family:var(--font);
+  font-size:9px;
+  text-transform:uppercase;
+  letter-spacing:0.08em;
+  font-weight:700;
+  padding:10px 12px;
+  text-align:center;
+  border-bottom:2px solid var(--gris-borde);
+  white-space:nowrap;
+}
+.load-table th.step-col{
+  color:var(--crema);
+  background:var(--negro-4);
+  border-bottom:2px solid var(--naranja);
+}
+.load-table th.step-col.active{
+  background:rgba(244,85,42,0.15);
+  color:var(--naranja);
+}
+.step-num{
+  display:inline-flex;align-items:center;justify-content:center;
+  width:18px;height:18px;
+  background:var(--naranja);
+  color:var(--crema);
+  font-size:9px;font-weight:900;
+  border-radius:50%;
+  margin-right:4px;
+}
+.load-table td{
+  padding:6px 8px;
+  border-bottom:1px solid var(--gris-borde2);
+  vertical-align:middle;
+}
+.load-table tr:last-child td{border-bottom:none;}
+
+.row-label{
+  background:var(--negro-3);
+  color:var(--gris-texto);
+  font-size:10px;
+  text-transform:uppercase;
+  letter-spacing:0.05em;
+  font-weight:600;
+  font-family:var(--font);
+  white-space:nowrap;
+  padding:8px 16px;
+  border-right:2px solid var(--gris-borde);
+  min-width:175px;
+}
+.row-alt{background:rgba(250,249,244,0.018);}
+
+/* table inputs */
+.td-input{
+  background:rgba(250,249,244,0.05);
+  border:1px solid var(--gris-borde);
+  border-radius:5px;
+  color:var(--crema);
+  font-family:var(--font);
+  font-size:11px;
+  font-weight:600;
+  padding:6px 8px;
+  width:100%;
+  min-width:82px;
+  outline:none;
+  transition:border-color 0.2s,background 0.2s;
+  text-align:right;
+}
+.td-input:focus{border-color:var(--naranja);background:rgba(244,85,42,0.08);}
+.td-input[type=number]::-webkit-inner-spin-button{opacity:0;}
+
+.td-select{
+  background:rgba(250,249,244,0.05);
+  border:1px solid var(--gris-borde);
+  border-radius:5px;
+  color:var(--crema);
+  font-family:var(--font);
+  font-size:10px;
+  font-weight:500;
+  padding:6px 8px;
+  width:100%;
+  min-width:130px;
+  outline:none;
+  cursor:pointer;
+  appearance:none;-webkit-appearance:none;
+  transition:border-color 0.2s;
+}
+.td-select:focus{border-color:var(--naranja);}
+.td-select option{background:var(--negro-2);}
+
+/* computed cells */
+.td-computed{
+  text-align:right;
+  font-family:var(--font);
+  font-size:11px;
+  font-weight:600;
+  color:var(--crema-dim);
+  padding:6px 12px;
+}
+.td-computed.dim{color:var(--gris-texto);font-weight:400;}
+
+/* section divider rows */
+tr.section-row td{
+  background:rgba(244,85,42,0.1);
+  border-left:3px solid var(--naranja);
+  font-family:var(--font);
+  font-size:9px;
+  font-weight:800;
+  color:var(--naranja);
+  text-transform:uppercase;
+  letter-spacing:0.12em;
+  padding:6px 14px;
+}
+
+/* result cells */
+.result-cell{
+  text-align:center;
+  font-family:var(--font);
+  font-size:10px;
+  font-weight:800;
+  letter-spacing:0.03em;
+  padding:6px 10px;
+  border-radius:5px;
+  white-space:nowrap;
+  text-transform:uppercase;
+  transition:all 0.2s;
+}
+.result-ok  {background:var(--verde-bg);   color:#3fd47a;  border:1px solid rgba(63,212,122,0.3);}
+.result-warn{background:var(--amarillo-bg); color:#f0ba30;  border:1px solid rgba(240,186,48,0.3);}
+.result-fail{background:var(--rojo-bg);    color:var(--naranja); border:1px solid rgba(244,85,42,0.35);}
+.result-empty{background:transparent;      color:var(--gris-texto); border:1px solid transparent;}
+
+/* ── SUMMARY ── */
+.summary-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:12px;margin-top:20px;}
+.step-summary{
+  background:var(--negro-3);
+  border:1px solid var(--gris-borde2);
+  border-radius:var(--radius);
+  padding:14px;
+  position:relative;
+  overflow:hidden;
+  transition:transform 0.2s;
+}
+.step-summary:hover{transform:translateY(-2px);}
+.step-summary::before{
+  content:'';position:absolute;top:0;left:0;right:0;height:3px;
+  background:var(--gris-borde);transition:background 0.3s;
+}
+.step-summary.s-ok::before   {background:var(--verde);}
+.step-summary.s-warn::before  {background:var(--amarillo);}
+.step-summary.s-fail::before  {background:var(--naranja);}
+.sum-step{font-size:9px;color:var(--gris-texto);text-transform:uppercase;letter-spacing:0.1em;margin-bottom:8px;font-weight:700;}
+.sum-pct{font-weight:900;font-size:24px;line-height:1;margin-bottom:4px;}
+.sum-pct.c-ok   {color:var(--verde);}
+.sum-pct.c-warn  {color:var(--amarillo);}
+.sum-pct.c-fail  {color:var(--naranja);}
+.sum-pct.c-empty {color:var(--gris-texto);}
+.sum-label{font-size:9px;color:var(--gris-texto);margin-bottom:8px;}
+.sum-badges{display:flex;gap:5px;flex-wrap:wrap;}
+.sum-badge{font-size:9px;font-weight:800;padding:3px 8px;border-radius:10px;text-transform:uppercase;letter-spacing:0.04em;}
+
+/* ── FOOTER NOTE ── */
+.app-note{
+  background:rgba(244,85,42,0.07);
+  border:1px solid rgba(244,85,42,0.25);
+  border-left:4px solid var(--naranja);
+  border-radius:var(--radius);
+  padding:14px 18px;
+  font-size:11px;
+  color:var(--gris-texto);
+  margin-top:20px;
+  line-height:1.8;
+}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:6px;
+  padding:8px 18px;border-radius:var(--radius);border:none;
+  cursor:pointer;font-family:var(--font);font-size:11px;font-weight:800;
+  letter-spacing:0.05em;text-transform:uppercase;transition:all 0.15s;
+}
+.btn-primary{background:var(--naranja);color:var(--crema);}
+.btn-primary:hover{background:var(--naranja-dim);transform:translateY(-1px);}
+.btn-ghost{background:transparent;color:var(--gris-texto);border:1px solid var(--gris-borde);}
+.btn-ghost:hover{border-color:var(--naranja);color:var(--naranja);}
+
+/* ── TOOLTIP ── */
+[data-tip]{position:relative;cursor:help;}
+[data-tip]::after{
+  content:attr(data-tip);
+  position:absolute;bottom:calc(100% + 6px);left:50%;transform:translateX(-50%);
+  background:var(--negro-4);border:1px solid var(--gris-borde);
+  color:var(--crema);font-size:10px;padding:4px 8px;border-radius:4px;
+  white-space:nowrap;opacity:0;pointer-events:none;transition:opacity 0.15s;z-index:200;
+}
+[data-tip]:hover::after{opacity:1;}
+
+/* ── ORANGE ACCENT LINE (bottom of page) ── */
+.naranja-line{
+  height:4px;background:var(--naranja);
+  width:100%;position:fixed;bottom:0;left:0;z-index:200;
+}
+
+/* ── PRINT ── */
+@media print{
+  .header,.no-print,.trama-text,.naranja-line{display:none;}
+  body{background:white;color:black;}
+  .card{border:1px solid #ccc;background:white;}
+}
+
+/* ── SCROLLBAR ── */
+::-webkit-scrollbar{width:5px;height:5px;}
+::-webkit-scrollbar-track{background:var(--negro);}
+::-webkit-scrollbar-thumb{background:var(--negro-4);border-radius:3px;}
+::-webkit-scrollbar-thumb:hover{background:var(--naranja);}
+</style>
+</head>
+<body>
+
+<!-- TRAMA INSTITUCIONAL -->
+<div class="trama-text" aria-hidden="true">
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+  <div class="trama-row">PALMERO PA</div>
+  <div class="trama-row">ERO PALM</div>
+</div>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="logo-palmero">PALMERO</div>
+  <div class="header-divider"></div>
+  <span class="header-tagline">Sistema de Aceptación de Carga · Rev. 27</span>
+  <div class="header-right">
+    <span class="header-badge">Palmero San Luis S.A.</span>
+    <button class="btn btn-ghost no-print" onclick="limpiarTodo()">⟳ Limpiar</button>
+    <button class="btn btn-primary no-print" onclick="window.print()">⎙ Imprimir</button>
+  </div>
+</div>
+
+<!-- MAIN CONTAINER -->
+<div class="container">
+
+  <!-- PROJECT INFO -->
+  <div class="card">
+    <div class="card-header">
+      <div class="barra-titulo" style="margin-bottom:0">Datos del Proyecto</div>
+    </div>
+    <div class="project-grid">
+      <div>
+        <div class="field-label">Nombre del Proyecto</div>
+        <input class="field-input" id="proj-nombre" type="text" placeholder="Descripción del proyecto...">
+      </div>
+      <div>
+        <div class="field-label">Cliente</div>
+        <input class="field-input" id="proj-cliente" type="text" placeholder="Nombre del cliente...">
+      </div>
+      <div>
+        <div class="field-label">Revisado por</div>
+        <input class="field-input" id="proj-revisor" type="text" placeholder="Iniciales..." value="M.A.V.">
+      </div>
+      <div>
+        <div class="field-label">Fecha</div>
+        <input class="field-input" id="proj-fecha" type="date">
+      </div>
+    </div>
+  </div>
+
+  <!-- EQUIPMENT SELECTOR -->
+  <div class="card">
+    <div class="card-header">
+      <div class="barra-titulo" style="margin-bottom:0">Selección de Equipo</div>
+    </div>
+    <div class="equip-row">
+      <div>
+        <div class="field-label">Frecuencia</div>
+        <select class="select-styled" id="sel-freq" onchange="filtrarEquipos()">
+          <option value="50">50 Hz</option>
+          <option value="60">60 Hz</option>
+        </select>
+      </div>
+      <div>
+        <div class="field-label">Modelo de Equipo</div>
+        <select class="select-styled" id="sel-equipo" onchange="seleccionarEquipo()">
+          <option value="">— Seleccionar modelo —</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- SPECS PANEL -->
+    <div style="margin-top:16px;">
+      <div class="field-label" style="margin-bottom:10px;">Datos del Generador Seleccionado</div>
+      <div class="specs-grid">
+        <div class="spec-item">
+          <div class="spec-label">Modelo</div>
+          <div class="spec-value" id="spec-modelo" style="font-size:13px">—</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Potencia Prime</div>
+          <div class="spec-value" id="spec-prime">—<span class="spec-unit">KW</span></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Potencia Nominal</div>
+          <div class="spec-value" id="spec-kva">—<span class="spec-unit">KVA</span></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Reactancia X"d Corr.</div>
+          <div class="spec-value" id="spec-xd">—</div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Impacto Prime</div>
+          <div class="spec-value" id="spec-imp">—<span class="spec-unit">%</span></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Máx. Impact. P. Activa</div>
+          <div class="spec-value" id="spec-maxact">—<span class="spec-unit">KW</span></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Tensión de Trabajo</div>
+          <div class="spec-value">400<span class="spec-unit">V</span></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Decalaje Alt./Temp.</div>
+          <div class="spec-value">0<span class="spec-unit">%</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- LOAD TABLE -->
+  <div class="card">
+    <div class="card-header">
+      <div class="barra-titulo" style="margin-bottom:0">Cuadro de Cargas — Pasos de Arranque</div>
+      <div style="margin-left:auto;font-size:10px;color:var(--gris-texto);font-weight:600;">V = 400V &nbsp;·&nbsp; FP no motriz = 0.8</div>
+    </div>
+
+    <div class="table-wrapper">
+    <table class="load-table" id="tabla-cargas">
+      <thead>
+        <tr>
+          <th style="text-align:left;min-width:175px;border-right:2px solid var(--gris-borde)">Parámetro</th>
+          <th class="step-col" id="sh1"><span class="step-num">1</span>Paso 1</th>
+          <th class="step-col" id="sh2"><span class="step-num">2</span>Paso 2</th>
+          <th class="step-col" id="sh3"><span class="step-num">3</span>Paso 3</th>
+          <th class="step-col" id="sh4"><span class="step-num">4</span>Paso 4</th>
+          <th class="step-col" id="sh5"><span class="step-num">5</span>Paso 5</th>
+          <th class="step-col" id="sh6"><span class="step-num">6</span>Paso 6</th>
+        </tr>
+      </thead>
+      <tbody>
+
+        <!-- INPUTS -->
+        <tr>
+          <td class="row-label">Pot. Motriz Nominal [KW]</td>
+          <td><input class="td-input" type="number" id="pm1" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pm2" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pm3" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pm4" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pm5" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pm6" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Pot. No Motriz Nominal [KW]</td>
+          <td><input class="td-input" type="number" id="pnm1" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pnm2" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pnm3" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pnm4" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pnm5" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+          <td><input class="td-input" type="number" id="pnm6" min="0" step="0.1" oninput="calcular()" placeholder="0"></td>
+        </tr>
+        <tr>
+          <td class="row-label">Máquina Accionada</td>
+          <td><select class="td-select" id="maq1" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="maq2" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="maq3" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="maq4" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="maq5" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="maq6" onchange="calcular()"></select></td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Tipo de Arranque</td>
+          <td><select class="td-select" id="arr1" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="arr2" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="arr3" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="arr4" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="arr5" onchange="calcular()"></select></td>
+          <td><select class="td-select" id="arr6" onchange="calcular()"></select></td>
+        </tr>
+        <tr>
+          <td class="row-label" data-tip="Solo si se conoce con certeza">Relación Real (opcional)</td>
+          <td><input class="td-input" type="number" id="rr1" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+          <td><input class="td-input" type="number" id="rr2" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+          <td><input class="td-input" type="number" id="rr3" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+          <td><input class="td-input" type="number" id="rr4" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+          <td><input class="td-input" type="number" id="rr5" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+          <td><input class="td-input" type="number" id="rr6" min="0" step="0.01" oninput="calcular()" placeholder="—"></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="7">▸ Valores Calculados</td></tr>
+
+        <tr>
+          <td class="row-label">Rendimiento Motor [%]</td>
+          <td class="td-computed" id="rend1">—</td><td class="td-computed" id="rend2">—</td>
+          <td class="td-computed" id="rend3">—</td><td class="td-computed" id="rend4">—</td>
+          <td class="td-computed" id="rend5">—</td><td class="td-computed" id="rend6">—</td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Corriente Nominal [A]</td>
+          <td class="td-computed" id="inom1">—</td><td class="td-computed" id="inom2">—</td>
+          <td class="td-computed" id="inom3">—</td><td class="td-computed" id="inom4">—</td>
+          <td class="td-computed" id="inom5">—</td><td class="td-computed" id="inom6">—</td>
+        </tr>
+        <tr>
+          <td class="row-label" data-tip="Relación Iarr/Inom directo">Relación Iarr/Inom</td>
+          <td class="td-computed" id="iarr1">—</td><td class="td-computed" id="iarr2">—</td>
+          <td class="td-computed" id="iarr3">—</td><td class="td-computed" id="iarr4">—</td>
+          <td class="td-computed" id="iarr5">—</td><td class="td-computed" id="iarr6">—</td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Relación Real o Prevista</td>
+          <td class="td-computed" id="rrp1">—</td><td class="td-computed" id="rrp2">—</td>
+          <td class="td-computed" id="rrp3">—</td><td class="td-computed" id="rrp4">—</td>
+          <td class="td-computed" id="rrp5">—</td><td class="td-computed" id="rrp6">—</td>
+        </tr>
+
+        <tr class="section-row"><td colspan="7">▸ Prueba Caída de Tensión</td></tr>
+
+        <tr>
+          <td class="row-label">Impacto Pot. Aparente [KVA]</td>
+          <td class="td-computed" id="pa1">—</td><td class="td-computed" id="pa2">—</td>
+          <td class="td-computed" id="pa3">—</td><td class="td-computed" id="pa4">—</td>
+          <td class="td-computed" id="pa5">—</td><td class="td-computed" id="pa6">—</td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Caída de Tensión Trans. [%]</td>
+          <td class="td-computed" id="cdt1">—</td><td class="td-computed" id="cdt2">—</td>
+          <td class="td-computed" id="cdt3">—</td><td class="td-computed" id="cdt4">—</td>
+          <td class="td-computed" id="cdt5">—</td><td class="td-computed" id="cdt6">—</td>
+        </tr>
+        <tr>
+          <td class="row-label" style="color:var(--crema);font-weight:800;">⚡ Resultado Prueba Tensión</td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t1">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t2">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t3">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t4">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t5">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-t6">—</div></td>
+        </tr>
+
+        <tr class="section-row"><td colspan="7">▸ Prueba Potencia Activa</td></tr>
+
+        <tr class="row-alt">
+          <td class="row-label dim">FP de Arranque (SPF)</td>
+          <td class="td-computed dim" id="spf1">—</td><td class="td-computed dim" id="spf2">—</td>
+          <td class="td-computed dim" id="spf3">—</td><td class="td-computed dim" id="spf4">—</td>
+          <td class="td-computed dim" id="spf5">—</td><td class="td-computed dim" id="spf6">—</td>
+        </tr>
+        <tr>
+          <td class="row-label">Impacto Pot. Activa [KW]</td>
+          <td class="td-computed" id="pac1">—</td><td class="td-computed" id="pac2">—</td>
+          <td class="td-computed" id="pac3">—</td><td class="td-computed" id="pac4">—</td>
+          <td class="td-computed" id="pac5">—</td><td class="td-computed" id="pac6">—</td>
+        </tr>
+        <tr class="row-alt">
+          <td class="row-label">Potencia Activa Máxima [KW]</td>
+          <td class="td-computed" id="pam1">—</td><td class="td-computed" id="pam2">—</td>
+          <td class="td-computed" id="pam3">—</td><td class="td-computed" id="pam4">—</td>
+          <td class="td-computed" id="pam5">—</td><td class="td-computed" id="pam6">—</td>
+        </tr>
+        <tr>
+          <td class="row-label">Caída Velocidad Trans. [%]</td>
+          <td class="td-computed" id="cdv1">—</td><td class="td-computed" id="cdv2">—</td>
+          <td class="td-computed" id="cdv3">—</td><td class="td-computed" id="cdv4">—</td>
+          <td class="td-computed" id="cdv5">—</td><td class="td-computed" id="cdv6">—</td>
+        </tr>
+        <tr>
+          <td class="row-label" style="color:var(--crema);font-weight:800;">⚡ Resultado Prueba P. Activa</td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a1">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a2">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a3">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a4">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a5">—</div></td>
+          <td style="padding:5px 8px;"><div class="result-cell result-empty" id="res-a6">—</div></td>
+        </tr>
+      </tbody>
+    </table>
+    </div>
+
+    <!-- SUMMARY GRID -->
+    <div class="summary-grid" id="summary-grid"></div>
+  </div>
+
+  <!-- NOTE -->
+  <div class="app-note">
+    <strong style="color:var(--naranja)">Nota:</strong>
+    Este programa es una aproximación basada en relaciones de arranque estimadas. Su exactitud es solo relativa.
+    <br>Criterios: Caída de Tensión ≤ 18% (⚠ entre 12–15% arranca con disturbios) · Caída de Velocidad &lt; 12.5%
+    <br><span style="color:var(--negro-4);font-size:10px;">Rev. 27 · PALMERO San Luis S.A. · www.palmero.com · consultas@palmero.com · (54) 11 5277 5100</span>
+  </div>
+
+</div>
+
+<!-- BARRA NARANJA INFERIOR -->
+<div class="naranja-line"></div>
+
+<script>
+// ════════════════════════════════════════════
+// DATOS DE EQUIPOS
+// [modelo, prime_kw, impacto%, kva_f, xd_corr, freq]
+// ════════════════════════════════════════════
+const EQUIPOS = [
+["PD-30 - 50HZ C",30,100,31,0.070645,50],["PD-30 - 50HZ W",30,100,41,0.125854,50],
+["PD-30 - 50HZ W 914",30,95,41,0.125854,50],["PD-40 - 50HZ C",40,100,45,0.063111,50],
+["PD-40 - 50HZ W",40,100,41,0.167805,50],["PD-40 - 50HZ W 914",40,95,41,0.167805,50],
+["PD-65 - 50HZ C",65,100,65,0.065,50],["PD-65 - 50HZ W",65,100,70,0.181536,50],
+["PD-65 - 50HZ W 914",65,95,70,0.181536,50],["PD-100 - 50HZ C",100,70,100,0.057,50],
+["PD-100 - 50HZ W",100,70,100,0.168,50],["PD-100 - 50HZ W 914",100,72,100,0.168,50],
+["PD-130 - 50HZ C",130,82,140,0.057571,50],["PD-130 - 50HZ W",130,82,140,0.144393,50],
+["PD-130 - 50HZ W 914",130,63,140,0.144393,50],["PD-209 - 50HZ C",209,70,209,0.065,50],
+["PD-209 - 50HZ W",209,70,210,0.106291,50],["PDG-25 - 50HZ GN C",25,100,31,0.058871,50],
+["PDG-25 - 50HZ GN W",25,100,27,0.069815,50],["PDG-35 - 50HZ GN C",35,100,45,0.055222,50],
+["PDG-35 - 50HZ GN W",35,100,41,0.146829,50],["PDG-56 - 50HZ GN C",56,80,60,0.060667,50],
+["PDG-56 - 50HZ GN W",56,80,60,0.060667,50],["PDG-80 - 50HZ GN C",80,50,80,0.074,50],
+["PDG-80 - 50HZ GN W",80,50,83,0.167711,50],["PDG-100 - 50HZ GN C",100,75,100,0.057,50],
+["PDG-100 - 50HZ GN W",100,75,100,0.1678,50],["PDG-187 - 50HZ GN C",187,40,200,0.060775,50],
+["PDG-187 - 50HZ GN W",187,40,210,0.095103,50],["PDG-250 - 50HZ GN C",250,40,250,0.072,50],
+["PDG-250 - 50HZ GN W",250,40,250,0.1145,50],["PDG-24 - 50HZ GLP C",24,100,31,0.056516,50],
+["PDG-24 - 50HZ GLP W",24,100,27,0.067022,50],["PDG-33 - 50HZ GLP C",33,100,45,0.052067,50],
+["PDG-33 - 50HZ GLP W",33,100,41,0.138439,50],["PDG-53 - 50HZ GLP C",53,100,60,0.057417,50],
+["PDG-53 - 50HZ GLP W",53,100,60,0.151668,50],["PDG-95 - 50HZ GLP C",95,75,100,0.05415,50],
+["PDG-95 - 50HZ GLP W",95,75,100,0.15941,50],["PDG-178 - 50HZ GLP C",178,40,200,0.05785,50],
+["PDG-178 - 50HZ GLP W",178,40,210,0.090526,50],["PDG-238 - 50HZ GLP C",238,40,250,0.068544,50],
+["PDG-238 - 50HZ GLP W",238,40,250,0.109004,50],["PP-8 - 50HZ C",8,100,16,0.0525,50],
+["PP-8 - 50HZ W",8,100,20.3,0.047291,50],["PP-13 - 50HZ C",13,60,16,0.085312,50],
+["PP-13 - 50HZ W",13,60,14,0.102793,50],["PP-20 - 50HZ C",20,70,20,0.083,50],
+["PP-20 - 50HZ W",20,70,23,0.176261,50],["PP-30 - 50HZ C",30,100,31,0.070645,50],
+["PP-30 - 50HZ W",30,100,41,0.125854,50],["PP-45 - 50HZ C",45,100,45,0.071,50],
+["PP-45 - 50HZ W",45,100,53,0.155462,50],["PP-65 - 50HZ C",65,100,65,0.065,50],
+["PP-65 - 50HZ W",65,100,70,0.181536,50],["PP-100 - 50HZ C",100,70,100,0.057,50],
+["PP-100 - 50HZ W",100,70,100,0.1678,50],["PP-505 - 50HZ C",505,50,505,0.1,50],
+["PP-505 - 50HZ W",505,50,500,0.084739,50],["PP-630 - 50HZ C",630,55,630,0.0839,50],
+["PP-630 - 50HZ W",630,55,650,0.099831,50],["PP-800 - 50HZ C",800,45,800,0.099,50],
+["PP-800 - 50HZ W",800,45,830,0.111325,50],["PP-1000 - 50HZ C",1000,55,1050,0.09619,50],
+["PP-1000 - 50HZ W",1000,55,1017,0.152409,50],["PP-1000 - 50HZ W Especial Clase F",1000,55,1250,0.112,50],
+["PP-1250 - 50HZ C",1250,72,1250,0.084,50],["PP-1250 - 50HZ W",1250,72,1250,0.14,50],
+["PP-1505 - 50HZ C",1505,71,1505,0.129,50],["PP-1505 - 50HZ W",1505,71,1550,0.115545,50],
+["PP-1505 - 50HZ W Especial",1505,71,2350,0.071728,50],["PP-1705 - 50HZ S",1705,63,1900,0.116658,50],
+["PP-1705 - 50HZ W",1705,70,1750,0.14322,50],["PP-1705 - 50HZ W Especial",1705,63,2350,0.08126,50],
+["PP-2050 - 50HZ S",2050,57,2080,0.118269,50],["PP-2050 - 50HZ W",2050,57,2100,0.124952,50],
+["PPG-351 - 50HZ C",351,25,400,0.149175,50],["PPG-435 - 50HZ C",435,25,435,0.24,50],
+["PPG-500 - 50HZ C",500,25,500,0.24,50],["PPG-597 - 50HZ C",597,25,597,0.244,50],
+["PPG-707 - 50HZ S",707,50,800,0.220938,50],["PPG-1065 - 50HZ C",1065,25,1065,0.196,50],
+["PPG-1210 - 50HZ S",1210,25,1360,0.186838,50],["PB-30 - 50HZ W",30,75,41,0.125854,50],
+["PB-45 - 50HZ W",45,60,53,0.155462,50],["PB-135 - 50HZ W",135,70,140,0.149946,50],
+["PB-250 - 50HZ W",250,52,250,0.1145,50],["PB-320 - 50HZ W",320,53,325,0.09856,50],
+["PB-400 - 50HZ W",400,55,410,0.104098,50],["PB-500 - 50HZ W",500,55,500,0.084,50],
+["PB-600 - 50HZ W",600,35,600,0.107,50],["PB-1000 - 50HZ W",1000,62,1100,0.151818,50],
+["PB-1250 - 50HZ W",1375,66,1375,0.149,50],["PBG-1200 - 50HZ W",1200,50,1650,0.113455,50],
+["PBG-1310 - 50HZ W",1310,50,1650,0.123855,50],["PBG-190 - 50HZ W",190,50,230,0.088226,50],
+["PBG-300 - 50HZ W",300,40,350,0.085714,50],["PBG-490 - 50HZ W",490,45,500,0.0931,50],
+["PBG-979 - 50HZ W",979,45,1118,0.135729,50],["PSG-367 - 50HZ GN W",367,23,410,0.09551,50],
+["PSG-455 - 50HZ GN W",455,23,450,0.125984,50],["PSG-413 - 50HZ GN W",413,23,410,0.107481,50],
+["PW-20-50Hz",20,70,20,0.077,50],["PW-30-50Hz",30,70,31,0.08129,50],
+["PW-50-50Hz",50,62,47.5,0.073684,50],["PW-63-50Hz",63,100,58,0.079293,50],
+["PW-100-50Hz",100,99,100,0.088,50],["PW-150-50Hz",150,85,150,0.102,50],
+["PW-200-50Hz",200,55,192,0.117708,50],["PW-250-50Hz",250,55,250,0.149,50],
+["PW-320-50Hz",320,55,325,0.101415,50],["PW-400-50Hz",400,55,410,0.167805,50],
+["PW-500-50Hz",500,55,500,0.117,50],["PW-640-50Hz",640,68,660,0.116364,50],
+["PW-750-50Hz",750,48,750,0.113,50],["PW-900-50Hz",900,40,910,0.111758,50],
+["PW-1000-50Hz",1000,40,1000,0.129,50],["PW-1250-50Hz",1250,66,1250,0.165,50],
+["PW-1500-50Hz",1500,50,1500,0.148,50],["PI-100 - 50HZ W",100,70,100,0.1678,50],
+["PI-60 - 50HZ W",60,70,65,0.085938,50],["PI-173 - 50HZ C",173,55,173,0.065,50],
+["PI-173 - 50HZ W",173,55,210,0.087983,50],["PI-206 - 50HZ C",206,55,209,0.064067,50],
+["PI-206 - 50HZ W",206,55,210,0.104766,50],["PI-250 - 50HZ C",250,53,253,0.071146,50],
+["PI-250 - 50HZ W",250,53,250,0.1145,50],["PI-310 - 50HZ C",310,43,310,0.094,50],
+["PI-310 - 50HZ W",310,43,325,0.09548,50],["PI-400 - 50HZ C",400,60,405,0.084938,50],
+["PI-400 - 50HZ W",400,60,410,0.104098,50],["PI-500 - 50HZ W",500,50,500,0.0839,50],
+["PI-600 - 50HZ W",600,50,650,0.107354,50],["PSG-460 - 50HZ GN W",460,23,475,0.115242,50],
+["PSG-479 - 50HZ GN W",479,28,515,0.133004,50],
+// 60Hz
+["PD-37 - 60HZ C",37,100,40.7,0.095455,60],["PD-37 - 60HZ W",37,100,51,0.145678,60],
+["PD-49 - 60HZ C",49,100,55,0.094436,60],["PD-49 - 60HZ W",49,100,51,0.192925,60],
+["PD-75 - 60HZ C",75,100,75,0.074,60],["PD-75 - 60HZ W",75,100,88,0.193636,60],
+["PD-122 - 60HZ C",122,70,130,0.063815,60],["PD-122 - 60HZ W",122,70,141,0.191306,60],
+["PD-157 - 60HZ C",157,82,160,0.068687,60],["PD-157 - 60HZ W",157,82,171,0.172975,60],
+["PD-225 - 60HZ C",225,60,225,0.077,60],["PD-225 - 60HZ W",225,60,233,0.120225,60],
+["PDG-29 - 60HZ GN C",29,100,40.7,0.074816,60],["PDG-29 - 60HZ GN W",29,100,42,0.069876,60],
+["PDG-40 - 60HZ GN C",40,100,55,0.077091,60],["PDG-40 - 60HZ GN W",40,100,51,0.163137,60],
+["PDG-58 - 60HZ GN C",58,100,80,0.05365,60],["PDG-58 - 60HZ GN W",58,100,75.5,0.056848,60],
+["PDG-90 - 60HZ GN C",90,60,105,0.075429,60],["PDG-90 - 60HZ GN W",90,60,103,0.195029,60],
+["PDG-120 - 60HZ GN C",120,75,130,0.062769,60],["PDG-120 - 60HZ GN W",120,75,141,0.18817,60],
+["PDG-198 - 60HZ GN C",198,40,225,0.06776,60],["PDG-198 - 60HZ GN W",198,40,233,0.105798,60],
+["PDG-262 - 60HZ GN C",262,40,280,0.080471,60],["PDG-262 - 60HZ GN W",262,40,292,0.118618,60],
+["PDG-28 - 60HZ GLP C",28,100,40.7,0.072236,60],["PDG-28 - 60HZ GLP W",28,100,42,0.067467,60],
+["PDG-38 - 60HZ GLP C",38,100,55,0.073236,60],["PDG-38 - 60HZ GLP W",38,100,51,0.149616,60],
+["PDG-55 - 60HZ GLP C",55,100,80,0.050875,60],["PDG-55 - 60HZ GLP W",55,100,75.5,0.155894,60],
+["PDG-115 - 60HZ GLP C",115,75,130,0.060154,60],["PDG-115 - 60HZ GLP W",115,75,141,0.18033,60],
+["PDG-189 - 60HZ GLP C",189,40,225,0.06468,60],["PDG-189 - 60HZ GLP W",189,40,233,0.100989,60],
+["PDG-250 - 60HZ GLP C",250,40,280,0.076786,60],["PDG-250 - 60HZ GLP W",250,40,292,0.113185,60],
+["PP-36 - 60HZ C",36,90,40.7,0.092875,60],["PP-36 - 60HZ W",36,90,51,0.141741,60],
+["PP-54 - 60HZ C",54,90,55,0.104073,60],["PP-54 - 60HZ W",54,90,68.1,0.184678,60],
+["PP-78 - 60HZ C",78,100,75,0.07696,60],["PP-78 - 60HZ W",78,100,95,0.186543,60],
+["PP-115 - 60HZ C",115,70,130,0.060154,60],["PP-115 - 60HZ W",115,70,141.7,0.179439,60],
+["PP-504 - 60HZ C",504,65,575,0.095541,60],["PP-504 - 60HZ W",504,65,570,0.088333,60],
+["PP-625 - 60HZ C",625,80,800,0.13125,60],["PP-625 - 60HZ W",625,80,750,0.119167,60],
+["PP-844 - 60HZ C",844,67,900,0.110658,60],["PP-844 - 60HZ W",844,67,960,0.115171,60],
+["PP-1000 - 60HZ C",1000,57,1200,0.095833,60],["PP-990 - 60HZ W",990,57,1250,0.125928,60],
+["PP-1260 - 60HZ C",1260,72,1400,0.0855,60],["PP-1260 - 60HZ W",1260,72,1460,0.124533,60],
+["PP-1520 - 60HZ C",1520,70,1700,0.129647,60],["PP-1510 - 60HZ W",1510,70,1950,0.124904,60],
+["PP-1705 - 60HZ W",1705,70,1750,0.14322,60],["PI-190 - 60HZ C",190,60,225,0.065022,60],
+["PI-190 - 60HZ W",190,60,233,0.101524,60],["PI-220 - 60HZ C",220,60,225,0.075289,60],
+["PI-220 - 60HZ W",220,60,233,0.117554,60],["PI-280 - 60HZ C",280,55,280,0.086,60],
+["PI-280 - 60HZ W",280,55,292,0.126575,60],["PI-340 - 60HZ C",340,45,345,0.110377,60],
+["PI-340 - 60HZ W",340,45,377,0.110027,60],["PI-415 - 60HZ C",415,60,465,0.085677,60],
+["PI-415 - 60HZ W",415,60,475,0.103968,60],["PI-505 - 60HZ W",505,60,570,0.088508,60],
+["PI-615 - 60HZ W",615,60,750,0.11726,60],
+];
+
+const RENDIMIENTOS=[
+  [0.368,68],[0.552,71],[0.736,75],[1.104,78],[1.472,80],[2.208,82],
+  [3.68,83],[5.52,83],[7.36,85],[11.04,86],[14.72,89],[18.4,89],
+  [22.08,90],[29.44,90],[36.8,90],[44.16,91],[55.2,91],[73.6,92],
+  [92.0,92],[110.4,92],[147.2,92],[184.0,92],[220.8,92],[257.6,93],
+  [294.4,93],[331.2,93],[368.0,93]
+];
+function lookupEff(kw){
+  if(kw<=0)return 100;
+  let eff=68;
+  for(const[pw,ef]of RENDIMIENTOS){if(kw>=pw)eff=ef;else break;}
+  return eff;
+}
+
+const STARTUP_TYPES=[
+  {id:1,label:"Directo"},{id:2,label:"Variador de Velocidad"},
+  {id:3,label:"Arranque Suave"},{id:4,label:"Estrella Triángulo"},
+  {id:5,label:"Autotrafo 80%"},{id:6,label:"Autotrafo 65%"},
+];
+const SPF=[0,0.35,0.98,0.5,0.52,0.5,0.5];
+const IARR_INOM=[[0,0,0,0,0],[0,8.8,8.0,7.0,6.0],[0,9.5,8.7,8.2,6.5]];
+const MAQUINAS=[
+  {id:1,label:"Bomba Centrífuga",     f:[0,1,1.3,2.5,0.33,0.68,0.46]},
+  {id:2,label:"Bomba de Pistones",    f:[0,1,1.5,3.0,0.33,0.68,0.46]},
+  {id:3,label:"Ventilador",           f:[0,1,1.3,2.5,0.33,0.68,0.46]},
+  {id:4,label:"Compresor de Frío",    f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:5,label:"Compresor de Tornillo",f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:6,label:"Compresor Centrífugo", f:[0,1,1.5,3.0,0.33,0.68,0.46]},
+  {id:7,label:"Compresor de Pistones",f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:8,label:"Cinta Transportadora", f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:9,label:"Tornillo de Elevación",f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:10,label:"Telesky",             f:[0,1,2.0,3.5,0.50,0.68,0.46]},
+  {id:11,label:"Elevador",            f:[0,1,1.5,3.0,0.33,0.68,0.46]},
+  {id:12,label:"Sierra Circular",     f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:13,label:"Sierra de Cinta",     f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:14,label:"Cuchillo Carnicero",  f:[0,1,2.0,3.5,0.33,0.68,0.46]},
+  {id:15,label:"Agitador",            f:[0,1,1.5,3.0,0.33,0.68,0.46]},
+  {id:16,label:"Mezclador",           f:[0,1,1.5,3.0,0.33,0.68,0.46]},
+  {id:17,label:"Machacadora",         f:[0,1,2.0,4.0,0.50,0.68,0.46]},
+  {id:18,label:"Trituradora",         f:[0,1,2.0,3.5,0.50,0.68,0.46]},
+  {id:19,label:"Refinador",           f:[0,1,1.5,2.5,0.33,0.68,0.46]},
+  {id:20,label:"Prensa",              f:[0,1,2.0,3.5,0.50,0.68,0.46]},
+];
+
+let equipoSeleccionado=null;
+const V=400, FP_NM=0.8;
+
+function init(){
+  document.getElementById('proj-fecha').value=new Date().toISOString().split('T')[0];
+  for(let i=1;i<=6;i++){
+    const ms=document.getElementById(`maq${i}`), as=document.getElementById(`arr${i}`);
+    ms.innerHTML='<option value="">— Tipo de máquina —</option>';
+    MAQUINAS.forEach(m=>{const o=document.createElement('option');o.value=m.id;o.textContent=m.label;ms.appendChild(o);});
+    as.innerHTML='<option value="">— Tipo de arranque —</option>';
+    STARTUP_TYPES.forEach(s=>{const o=document.createElement('option');o.value=s.id;o.textContent=s.label;as.appendChild(o);});
+  }
+  filtrarEquipos();
+  buildSummary();
+}
+
+function filtrarEquipos(){
+  const freq=parseInt(document.getElementById('sel-freq').value);
+  const sel=document.getElementById('sel-equipo');
+  const cur=sel.value;
+  sel.innerHTML='<option value="">— Seleccionar modelo —</option>';
+  EQUIPOS.filter(e=>e[5]===freq).forEach(e=>{const o=document.createElement('option');o.value=e[0];o.textContent=e[0];sel.appendChild(o);});
+  sel.value=cur;
+  if(!sel.value){equipoSeleccionado=null;updateSpecsPanel();}else seleccionarEquipo();
+}
+
+function seleccionarEquipo(){
+  equipoSeleccionado=EQUIPOS.find(e=>e[0]===document.getElementById('sel-equipo').value)||null;
+  updateSpecsPanel();calcular();
+}
+
+function updateSpecsPanel(){
+  const e=equipoSeleccionado;
+  const maxAct=e?(e[2]*e[1]*0.8/100).toFixed(1):'—';
+  document.getElementById('spec-modelo').textContent=e?e[0].split(' - ')[0]:'—';
+  document.getElementById('spec-prime').innerHTML=e?`${e[1]}<span class="spec-unit">KW</span>`:'—';
+  document.getElementById('spec-kva').innerHTML=e?`${e[3]}<span class="spec-unit">KVA</span>`:'—';
+  document.getElementById('spec-xd').textContent=e?e[4].toFixed(5):'—';
+  document.getElementById('spec-imp').innerHTML=e?`${e[2]}<span class="spec-unit">%</span>`:'—';
+  document.getElementById('spec-maxact').innerHTML=e?`${maxAct}<span class="spec-unit">KW</span>`:'—';
+}
+
+function calcularPaso(i,e,prevMKW,prevNMKW){
+  const pm=parseFloat(document.getElementById(`pm${i}`).value)||0;
+  const pnm=parseFloat(document.getElementById(`pnm${i}`).value)||0;
+  const maqId=parseInt(document.getElementById(`maq${i}`).value)||0;
+  const arrId=parseInt(document.getElementById(`arr${i}`).value)||0;
+  const rrInput=parseFloat(document.getElementById(`rr${i}`).value)||0;
+  if(!e||(pm===0&&pnm===0)||!maqId||!arrId)return null;
+  const maq=MAQUINAS.find(m=>m.id===maqId);if(!maq)return null;
+  const eff=lookupEff(pm);
+  let i_nom;
+  if(pm===0){i_nom=pnm>0?(1000*pnm/(1.732*V)):0;}
+  else{i_nom=1000*(pm/(1.732*V*eff/100*0.85)+(pnm>0?pnm/(1.732*V):0));}
+  const vCol=pm>=100?4:pm>=25?3:pm>=6.3?2:1;
+  const iarr_inom=pm===0?0:IARR_INOM[2][vCol];
+  const factorTabla=maq.f[arrId];
+  let ratio;
+  if(rrInput>0)ratio=rrInput;
+  else if(pm===0)ratio=0;
+  else if(arrId===2||arrId===3)ratio=factorTabla;
+  else ratio=factorTabla*iarr_inom;
+  const pa_impact=(1.732*i_nom*ratio*V*0.85/1000)+(i===1?pnm:pnm/FP_NM);
+  let cdt=0;
+  if(pa_impact>0){const xd=e[4];const pk=e[1];cdt=(100*xd)/((pk/pa_impact)+xd);}
+  let res_t;
+  if(pa_impact===0||cdt===0)res_t="No arranca";
+  else if(cdt>18)res_t="No arranca";
+  else if(cdt>=12&&cdt<=15)res_t="Arranca con Disturbios";
+  else res_t="Arranca";
+  const spf=SPF[arrId];
+  const spf_w=pm===0?1:(spf*pa_impact+pnm)/(pa_impact+pnm/FP_NM+1e-10);
+  const pa_act=(1.732*i_nom*ratio*V/1000)*spf_w+pnm;
+  const max_imp=e[2]*e[1]*0.8/100;
+  const max_act=pa_act+prevMKW+prevNMKW+pnm;
+  const thr=e[1]*0.8*1.1;
+  const cdv=max_act>=thr?1.0:pa_act/(max_imp||1)*0.1;
+  const res_a=cdv>=0.125?"No arranca":"Arranca";
+  return{pm,pnm,eff,i_nom,iarr_inom,ratio,pa_impact,cdt,res_t,spf,spf_w,pa_act,max_act,cdv,res_a};
+}
+
+function fmt(v,d=2){if(v===null||isNaN(v))return'—';return v.toFixed(d);}
+function setC(id,v,d=2){const el=document.getElementById(id);if(el)el.textContent=v===null?'—':fmt(v,d);}
+function setRes(id,text){
+  const el=document.getElementById(id);if(!el)return;
+  el.className='result-cell';
+  if(!text||text==='—'){el.className+=' result-empty';el.textContent='—';}
+  else if(text==='Arranca'){el.className+=' result-ok';el.textContent='✓ Arranca';}
+  else if(text==='Arranca con Disturbios'){el.className+=' result-warn';el.textContent='⚠ Con Disturbios';}
+  else{el.className+=' result-fail';el.textContent='✕ No Arranca';}
+}
+
+function calcular(){
+  const e=equipoSeleccionado;
+  const resultados=[];
+  let pmKW=0,pnmKW=0;
+  for(let i=1;i<=6;i++){
+    const r=calcularPaso(i,e,pmKW,pnmKW);
+    resultados.push(r);
+    if(r){pmKW+=r.pm;pnmKW+=r.pnm;}
+    setC(`rend${i}`,r?r.eff:null,0);
+    setC(`inom${i}`,r?r.i_nom:null,1);
+    setC(`iarr${i}`,r?r.iarr_inom:null,1);
+    setC(`rrp${i}`,r?r.ratio:null,3);
+    setC(`pa${i}`,r?r.pa_impact:null,2);
+    setC(`cdt${i}`,r?r.cdt:null,2);
+    setRes(`res-t${i}`,r?r.res_t:null);
+    const s=document.getElementById(`spf${i}`);if(s)s.textContent=r?r.spf.toFixed(2):'—';
+    setC(`pac${i}`,r?r.pa_act:null,2);
+    setC(`pam${i}`,r?r.max_act:null,2);
+    setC(`cdv${i}`,r?(r.cdv*100):null,2);
+    setRes(`res-a${i}`,r?r.res_a:null);
+  }
+  updateSummary(resultados);
+}
+
+function buildSummary(){
+  const g=document.getElementById('summary-grid');g.innerHTML='';
+  for(let i=1;i<=6;i++){
+    const d=document.createElement('div');d.className='step-summary s-empty';d.id=`sum${i}`;
+    d.innerHTML=`<div class="sum-step">Paso ${i}</div><div class="sum-pct c-empty" id="sum-pct${i}">—</div><div class="sum-label" id="sum-lbl${i}">Sin carga</div><div class="sum-badges" id="sum-badges${i}"></div>`;
+    g.appendChild(d);
+  }
+}
+
+function updateSummary(resultados){
+  for(let i=1;i<=6;i++){
+    const r=resultados[i-1];
+    const box=document.getElementById(`sum${i}`);
+    const pct=document.getElementById(`sum-pct${i}`);
+    const lbl=document.getElementById(`sum-lbl${i}`);
+    const badges=document.getElementById(`sum-badges${i}`);
+    if(!r){
+      box.className='step-summary s-empty';pct.className='sum-pct c-empty';
+      pct.textContent='—';lbl.textContent='Sin carga';badges.innerHTML='';continue;
+    }
+    const tFail=r.res_t==='No arranca',aFail=r.res_a==='No arranca',tWarn=r.res_t==='Arranca con Disturbios';
+    const anyFail=tFail||aFail,anyWarn=tWarn&&!anyFail;
+    box.className=`step-summary ${anyFail?'s-fail':anyWarn?'s-warn':'s-ok'}`;
+    pct.className=`sum-pct ${anyFail?'c-fail':anyWarn?'c-warn':'c-ok'}`;
+    pct.textContent=`${r.cdt.toFixed(1)}%`;
+    lbl.textContent='Caída Tensión';
+    badges.innerHTML=`
+      <span class="sum-badge ${r.res_t==='Arranca'?'result-ok':r.res_t==='Arranca con Disturbios'?'result-warn':'result-fail'}">V: ${r.res_t==='Arranca'?'✓':r.res_t==='Arranca con Disturbios'?'⚠':'✕'}</span>
+      <span class="sum-badge ${r.res_a==='Arranca'?'result-ok':'result-fail'}">P: ${r.res_a==='Arranca'?'✓':'✕'}</span>
+    `;
+  }
+}
+
+function limpiarTodo(){
+  if(!confirm('¿Limpiar todos los datos del cuadro de cargas?'))return;
+  for(let i=1;i<=6;i++){
+    ['pm','pnm','rr'].forEach(f=>document.getElementById(`${f}${i}`).value='');
+    ['maq','arr'].forEach(f=>document.getElementById(`${f}${i}`).value='');
+  }
+  calcular();
+}
+
+init();
+</script>
+</body>
+</html>

@@ -29,3 +29,7 @@ Fuente: **Mona Sans** (Google Fonts), pesos 200–900, variable width.
 - Es una SPA estática — sin servidor, sin dependencias npm.
 - Para previsualizar: abrir el HTML directamente en el browser.
 - Mantener todo en el archivo único; no fragmentar en módulos externos salvo que se lo indique explícitamente.
+
+---
+
+Creado por: F. Luna - Revisado por: M. Villegas

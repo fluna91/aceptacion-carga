@@ -985,8 +985,8 @@ function updateSpecsPanel(){
   const e=equipoSeleccionado;
   const maxAct=e?(e[2]*e[1]*0.8/100).toFixed(1):'—';
   document.getElementById('spec-modelo').textContent=e?e[0].split(' - ')[0]:'—';
-  document.getElementById('spec-prime').innerHTML=e?`${e[3]}<span class="spec-unit">KVA</span>`:'—';
-  document.getElementById('spec-kva').innerHTML=e?`${(e[3]*0.8).toFixed(1)}<span class="spec-unit">KW</span>`:'—';
+  document.getElementById('spec-prime').innerHTML=e?`${e[1]}<span class="spec-unit">KVA</span>`:'—';
+  document.getElementById('spec-kva').innerHTML=e?`${(e[1]*0.8).toFixed(1)}<span class="spec-unit">KW</span>`:'—';
   document.getElementById('spec-xd').textContent=e?e[4].toFixed(5):'—';
   document.getElementById('spec-imp').innerHTML=e?`${e[2]}<span class="spec-unit">%</span>`:'—';
   document.getElementById('spec-maxact').innerHTML=e?`${maxAct}<span class="spec-unit">KW</span>`:'—';

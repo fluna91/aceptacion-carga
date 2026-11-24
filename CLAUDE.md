@@ -14,7 +14,7 @@ una planilla Excel/VBA. Calcula aceptación de carga de generadores.
 
 ## Stack
 
-- Archivo único: `aceptacion_carga_palmero.html`
+- Archivo único: `index.html` (se llama así por el deploy en GitHub Pages; no renombrar)
 - Sin build, sin dependencias externas (salvo Google Fonts).
 - Branding Palmero ya aplicado: variables CSS en `:root`
   (`--negro`, `--naranja`, `--crema`, tipografía Mona Sans).
